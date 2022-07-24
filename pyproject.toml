@@ -6,7 +6,7 @@ authors = ["Your Name <you@example.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-graia-ariadne = {extras = ["standard"], version = "^0.7.16"}
+graia-ariadne = {extras = ["standard"], version = "^0.7.17"}
 
 [tool.poetry.dev-dependencies]
 
