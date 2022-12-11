@@ -70,3 +70,32 @@ async def get_sentence(app:Ariadne, group:Group, message: Annotated[MessageChain
         group,
         MessageChain(choice(slist))
     )
+
+
+@channel.use(ListenerSchema(listening_events=[GroupMessage]))
+async def get_sentence(app:Ariadne, group:Group, message: Annotated[MessageChain, StartsWith(["搜语录"])]):
+    rawmsg = message.display
+    while(rawmsg is not "" and rawmsg[0] == " "):rawmsg = rawmsg[1:]
+    if rawmsg is "":
+        return await app.send_message(
+            group,
+            "empty string not allowed!!!1"
+        )
+    if keywordDetection(rawmsg) == 1:
+        return await app.send_message(
+            group,
+            MessageChain(f"喜欢玩保留字？")
+        )
+    slist = mulio.searchsp(rawmsg)
+    if slist == []:
+        await app.send_message(
+            group,
+            f"没搜到 {rawmsg} ，你再想想"
+        )
+    outtext = "\n".join([slist[t][1] + "  ——" + slist[t][2] for t in range(len(slist))])
+    await app.send_message(
+        group,
+        MessageChain(outtext)
+    )
+
+    

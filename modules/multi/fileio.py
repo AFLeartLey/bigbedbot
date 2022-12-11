@@ -1,4 +1,5 @@
 import json
+import difflib as df
 from pathlib import Path
 
 sentence_pth = Path(__file__, "..", "..","..", "data", "multi_sentence.json").resolve()
@@ -11,6 +12,21 @@ def getsp(targ:str):
     try:
         return allst[targ]
     except(KeyError):
+        return []
+
+def searchsp(keyw:str):
+    allst:dict[str,list[str]] = get()
+    try:
+        au, txt, res = [], [], []
+        for it in allst.items():
+            if len(it[1] >= 4):
+                au.append(it[0])
+                txt.append(it[1])
+        matches = df.get_close_matches(keyw, txt, n = 3, cutoff = 0.3)
+        for m in matches:
+            res.append([au[txt.index(m)], m])
+        return res
+    except:
         return []
 
 def write(inp: str,to:str):
