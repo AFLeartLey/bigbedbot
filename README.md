@@ -1,7 +1,7 @@
 # bigbedbot
 A personal bot.
 
-now still in dev
+~now still in dev~ dedbot xd
 
 底下两行从 [bigbedbot-py](https://github.com/mikezom/bigbedbot-py) 抄的 鸣谢！
 
